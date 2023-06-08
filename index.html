@@ -1,73 +1,65 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Проект "Комменты"</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
 
-  <body>
-    <div class="container">
-      <ul class="comments">
-        <li class="comment">
-          <div class="comment-header">
-            <div>Глеб Фокин</div>
-            <div>12.02.22 12:18</div>
-          </div>
-          <div class="comment-body">
-            <div class="comment-text">
-              Это будет первый комментарий на этой странице
-            </div>
-          </div>
-          <div class="comment-footer">
-            <div class="likes">
-              <span class="likes-counter">3</span>
-              <button class="like-button"></button>
-            </div>
-          </div>
-        </li>
-        <li class="comment">
-          <div class="comment-header">
-            <div>Варвара Н.</div>
-            <div>13.02.22 19:22</div>
-          </div>
-          <div class="comment-body">
-            <div class="comment-text">
-              Мне нравится как оформлена эта страница! ❤
-            </div>
-          </div>
-          <div class="comment-footer">
-            <div class="likes">
-              <span class="likes-counter">75</span>
-              <button class="like-button -active-like"></button>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <div class="add-form">
-        <input
-          type="text"
-          class="add-form-name"
-          placeholder="Введите ваше имя"
-        />
-        <textarea
-          type="textarea"
-          class="add-form-text"
-          placeholder="Введите ваш коментарий"
-          rows="4"
-        ></textarea>
-        <div class="add-form-row">
-          <button class="add-form-button">Написать</button>
+<head>
+  <title>Проект "Комменты"</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="container">
+    <ul class="comments">
+      <li class="comment">
+        <div class="comment-header">
+          <div>Глеб Фокин</div>
+          <div>12.02.22 12:18</div>
         </div>
+        <div class="comment-body">
+          <div class="comment-text">
+            Это будет первый комментарий на этой странице
+          </div>
+        </div>
+        <div class="comment-footer">
+          <div class="likes">
+            <span class="likes-counter">3</span>
+            <button class="like-button"></button>
+          </div>
+        </div>
+      </li>
+      <li class="comment">
+        <div class="comment-header">
+          <div>Варвара Н.</div>
+          <div>13.02.22 19:22</div>
+        </div>
+        <div class="comment-body">
+          <div class="comment-text">
+            Мне нравится как оформлена эта страница! ❤
+          </div>
+        </div>
+        <div class="comment-footer">
+          <div class="likes">
+            <span class="likes-counter">75</span>
+            <button class="like-button -active-like"></button>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="add-form">
+      <input type="text" class="add-form-name" placeholder="Введите ваше имя" />
+      <textarea type="textarea" class="add-form-text" placeholder="Введите ваш коментарий" rows="4"></textarea>
+      <div class="add-form-row">
+        <button class="add-form-button">Написать</button>
       </div>
     </div>
-  </body>
+  </div>
+</body>
 
-  <script>
-    "use strict";
-    
+<script>
+  "use strict";
 
-    const inputNameElement = document.querySelector('.add-form-name');
+
+  const inputNameElement = document.querySelector('.add-form-name');
   const inputTextElement = document.querySelector('.add-form-text');
   const buttonElement = document.querySelector('.add-form-button');
   const commentsElement = document.querySelector('.comments');
@@ -81,7 +73,7 @@
       textComment: 'Это будет первый комментарий на этой страницe',
       likeComment: false,
       likesNumber: 3,
-     // propertyColorLike: classList.add("-no-active-like"),
+      propertyColorLike: 'like-button -no-active-like',
     },
     {
       name: 'Варвара Н.',
@@ -89,7 +81,7 @@
       textComment: 'Мне нравится как оформлена эта страница! ❤',
       likeComment: false,
       likesNumber: 75,
-      //propertyColorLike: classList.add("-no-active-like"),
+      propertyColorLike: 'like-button -no-active-like',
     },
   ];
 
@@ -97,7 +89,7 @@
 
   function getLikeButton() {
 
-    
+
 
     const likesButton = document.querySelectorAll('.like-button');
 
@@ -106,23 +98,25 @@
       like.addEventListener("click", () => {
         const likeIndex = like.dataset.index;
         const commentsElement = comments[likeIndex];
-                
+
         if (commentsElement.likeComment) {
           commentsElement.likesNumber -= 1;
           commentsElement.likeComment = false;
+          commentsElement.propertyColorLike = 'like-button -no-active-like';
           //like.style.backgroundImage = url("data:image/svg+xml,%3Csvg width='22' height='20' viewBox='0 0 22 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.95 0C14.036 0 12.199 0.882834 11 2.26703C9.801 0.882834 7.964 0 6.05 0C2.662 0 0 2.6267 0 5.99455C0 10.1035 3.74 13.4714 9.405 18.5613L11 20L12.595 18.5613C18.26 13.4714 22 10.1035 22 5.99455C22 2.6267 19.338 0 15.95 0Z' fill='none' stroke='%23BCEC30'/%3E%3C/svg%3E");
-          like.classList.add("-no-active-like");
-          like.classList.remove("-active-like");
-          renderComments();     
+          //like.classList.add("-no-active-like");
+          //like.classList.remove("-active-like");
+          renderComments();
         } else {
           commentsElement.likesNumber += 1;
           commentsElement.likeComment = true;
+          commentsElement.propertyColorLike = 'like-button -no-active-like';
           //like.style.backgroundImage = url("data:image/svg+xml,%3Csvg width='22' height='20' viewBox='0 0 22 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.95 0C14.036 0 12.199 0.882834 11 2.26703C9.801 0.882834 7.964 0 6.05 0C2.662 0 0 2.6267 0 5.99455C0 10.1035 3.74 13.4714 9.405 18.5613L11 20L12.595 18.5613C18.26 13.4714 22 10.1035 22 5.99455C22 2.6267 19.338 0 15.95 0Z' fill='%23BCEC30'/%3E%3C/svg%3E");
-          like.classList.add("-active-like");
-          like.classList.remove("-no-active-like");
-          renderComments();         
+          //like.classList.add("-active-like");
+          //like.classList.remove("-no-active-like");
+          renderComments();
         }
-       
+
       })
     }
   };
@@ -134,10 +128,10 @@
 
 
   const renderComments = () => {
-    
+
     const commentsHtml = comments.map((comment, index) => {
 
-    return `<li class="comment">
+      return `<li class="comment">
           <div class="comment-header">
             <div>${comment.name}</div>
             <div>${comment.dateСreation}</div>
@@ -150,13 +144,13 @@
           <div class="comment-footer">
             <div class="likes">
               <span class="likes-counter"> ${comment.likesNumber}</span>
-              <button data-index="${index}" class="like-button -no-active-like"></button>
+              <button data-index="${index}" class='${comment.propertyColorLike}'></button>
             </div>
           </div>
         </li>`;
     }).join("");
 
-    
+
     commentsElement.innerHTML = commentsHtml;
     getLikeButton();
   };
@@ -249,5 +243,6 @@
   });
 
    //console.log("It works!");
-  </script>
+</script>
+
 </html>
