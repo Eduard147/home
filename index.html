@@ -81,67 +81,215 @@
       textComment: 'Мне нравится как оформлена эта страница! ❤',
       likeComment: false,
       likesNumber: 75,
-      propertyColorLike: 'like-button -no-active-like',
+      propertyColorLike: 'like-button no-active-like',
     },
   ];
 
 
 
-  function getLikeButton() {
+  //редактирование текста уже написанного комментария 
+  function editorComment() {
+    const editorButtonElements = document.querySelectorAll('.editor-button');
+    const commentsBodyElements = document.querySelectorAll('.comment-body');//+
+    const commentsTextElements = document.querySelectorAll('.comment-text');//+
+
+    for (const editorButtonElement of editorButtonElements) {
+
+      editorButtonElement.addEventListener("click", (event) => {
+        event.stopPropagation();
+
+        const editorButtonIndex = editorButtonElement.dataset.index;
+        console.log(editorButtonIndex);       
+
+          if (editorButtonElement.textContent === 'Редактировать') {
+
+            editorButtonElement.textContent = 'Сохранить';
+
+            commentsTextElements[editorButtonIndex].innerHTML = `<textarea class="comment-text">${comments[editorButtonIndex].textComment}</textarea>`;
+            commentsTextElements.value = `${comments[editorButtonIndex].textComment}`; 
+            console.log(commentsTextElements.value);
+
+          } else {
+
+            comments[editorButtonIndex].textComment = commentsTextElements.value;
+            comments[editorButtonIndex].dateСreation = `${currentDate} (изменено)`;
+            console.log(comments[editorButtonIndex].textComment);
+
+            renderComments();
+          }
+      }
 
 
+      )
+    }
+  }
+
+
+  editorComment();
+
+
+
+//первый вариант:комментарий и имя при клике на кнопку «Редактировать» подставляются  в уже существующую форму добавления комментария и имени
+// function editorComment() {
+// const editorButtonElements = document.querySelectorAll('.editor-button');
+
+// for (const editorButtonElement of editorButtonElements) {
+
+//   editorButtonElement.addEventListener("click", (event) => {
+//     event.stopPropagation();
+
+//     const editorButtonIndex = editorButtonElement.dataset.index;
+//     console.log(editorButtonIndex);
+
+
+//     if (editorButtonElement.textContent === 'Редактировать') {
+
+//       editorButtonElement.textContent = 'Сохранить';
+
+//       inputTextElement.value = `${comments[editorButtonIndex].textComment}`; 
+//       inputNameElement.value = `${comments[editorButtonIndex].name}`; 
+
+
+//     } else {
+//       comments[editorButtonIndex].textComment = inputTextElement.value;
+//       comments[editorButtonIndex].name = inputNameElement.value;
+//       comments[editorButtonIndex].dateСreation = `${currentDate} (изменено)`;
+//       renderComments();
+//       inputTextElement.value = '';
+//       inputNameElement.value = '';
+//     }
+
+//   }     
+//   )
+// }
+// };
+
+
+   function getLikeButton() {
 
     const likesButton = document.querySelectorAll('.like-button');
 
+
+//счетчик лайков у каждого комментария
+  function getLikeButton() {
+    const likesButton = document.querySelectorAll('.like-button');
     for (const like of likesButton) {
+      like.addEventListener("click", (event) => {
+
+        event.stopPropagation();
 
       like.addEventListener("click", () => {
         const likeIndex = like.dataset.index;
         const commentsElement = comments[likeIndex];
-
+                
         if (commentsElement.likeComment) {
           commentsElement.likesNumber -= 1;
           commentsElement.likeComment = false;
-          commentsElement.propertyColorLike = 'like-button -no-active-like';
-          //like.style.backgroundImage = url("data:image/svg+xml,%3Csvg width='22' height='20' viewBox='0 0 22 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.95 0C14.036 0 12.199 0.882834 11 2.26703C9.801 0.882834 7.964 0 6.05 0C2.662 0 0 2.6267 0 5.99455C0 10.1035 3.74 13.4714 9.405 18.5613L11 20L12.595 18.5613C18.26 13.4714 22 10.1035 22 5.99455C22 2.6267 19.338 0 15.95 0Z' fill='none' stroke='%23BCEC30'/%3E%3C/svg%3E");
-          //like.classList.add("-no-active-like");
-          //like.classList.remove("-active-like");
-          renderComments();
+          commentsElement.propertyColorLike = 'like-button -no-active-like';           
+        const commentsElementLikeIndex = comments[likeIndex];
+
+        if (commentsElementLikeIndex.likeComment) {
+          commentsElementLikeIndex.likesNumber -= 1;
+          commentsElementLikeIndex.likeComment = false;
+          commentsElementLikeIndex.propertyColorLike = 'like-button -no-active-like';
         } else {
           commentsElement.likesNumber += 1;
           commentsElement.likeComment = true;
-          commentsElement.propertyColorLike = 'like-button -no-active-like';
-          //like.style.backgroundImage = url("data:image/svg+xml,%3Csvg width='22' height='20' viewBox='0 0 22 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.95 0C14.036 0 12.199 0.882834 11 2.26703C9.801 0.882834 7.964 0 6.05 0C2.662 0 0 2.6267 0 5.99455C0 10.1035 3.74 13.4714 9.405 18.5613L11 20L12.595 18.5613C18.26 13.4714 22 10.1035 22 5.99455C22 2.6267 19.338 0 15.95 0Z' fill='%23BCEC30'/%3E%3C/svg%3E");
-          //like.classList.add("-active-like");
-          //like.classList.remove("-no-active-like");
-          renderComments();
+          commentsElement.propertyColorLike = 'like-button -active-like';                  
+          commentsElementLikeIndex.likesNumber += 1;
+          commentsElementLikeIndex.likeComment = true;
+          commentsElementLikeIndex.propertyColorLike = 'like-button -active-like';
         }
-
-      })
+        renderComments();  
+       
+        renderComments();
+      }
+      }
+      )
     }
-  };
+      )
+    };
   getLikeButton();
 
+  const commentsHtml = comments.map((comment, index) => {   
 
+return `<li class="comment">
+      <div class="comment-header">
+        <div>${comment.name}</div>
+let inputTextElementValue = '';
 
+//Ответы на комментарии
+function replyToComment() {
 
+let commentElements = document.querySelectorAll('.comment');
 
+for (const commentElement of commentElements) {
+  commentElement.addEventListener("click", () => {
+
+    const indexComment = commentElement.dataset.index;
+    let QUOTE_BEGIN = 'QUOTE_BEGIN';
+    // QUOTE_BEGIN.hidden = true;
+    //QUOTE_BEGIN = QUOTE_BEGIN.hidden;
+
+    let QUOTE_END = 'QUOTE_END';
+    //QUOTE_END.hidden = true;
+    // QUOTE_END = QUOTE_BEGIN.hidden;
+
+    inputTextElement.value =
+      `${QUOTE_BEGIN}${comments[indexComment].name}:\n${comments[indexComment].textComment}${QUOTE_END}\n\n`;
+
+    // inputTextElement.value =
+    // `QUOTE_BEGIN${comments[indexComment].name}:\n${comments[indexComment].textComment}QUOTE_END`;
+
+    //inputTextElementValue =  `QUOTE_BEGIN${inputTextElement.value}QUOTE_END`;
+
+    // inputNameElement = inputNameElement.replaceAll("QUOTE_BEGIN", "<div class='comment-quote'><b>")
+    //   .replaceAll("QUOTE_END", "</b></div>")        
+
+    //console.log(inputTextElementValue);
+  }
+  )
+}
+};
+      
+ 
+
+          
+
+  replyToComment()
 
   const renderComments = () => {
 
     const commentsHtml = comments.map((comment, index) => {
 
-      return `<li class="comment">
-          <div class="comment-header">
-            <div>${comment.name}</div>
+      return `<li class="comment" data-index="${index}">
+          <div class="comment-header" data-index="${index}">
+            <div>${comment.name
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")}
+            </div>
             <div>${comment.dateСreation}</div>
           </div>
           <div class="comment-body">
             <div class="comment-text">
               ${comment.textComment}
+            <div data-index="${index}" class="comment-text" >
+              ${comment.textComment
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll('QUOTE_BEGIN', "<div class='comment-quote'><b>")
+          .replaceAll('QUOTE_END', "</b></div>")
+        }
             </div>
           </div>
           <div class="comment-footer">
+            <div class="editor">
+            <button data-index="${index}" class='editor-button'>Редактировать</button>
+            </div>
             <div class="likes">
               <span class="likes-counter"> ${comment.likesNumber}</span>
               <button data-index="${index}" class='${comment.propertyColorLike}'></button>
@@ -150,9 +298,12 @@
         </li>`;
     }).join("");
 
+    
 
     commentsElement.innerHTML = commentsHtml;
     getLikeButton();
+    replyToComment();
+    editorComment();
   };
 
   renderComments();
@@ -164,56 +315,7 @@
   //доп.задание1  кнопка «Написать» не кликабельна, если имя или текст в форме незаполненные.
   buttonElement.setAttribute('disabled', true);
 
-  inputNameElement.addEventListener("input", () => {
-
-    buttonElement.setAttribute('disabled', true);
-
-    if ((inputNameElement.value.length > 0) && (inputTextElement.value.length > 0)) {
-
-      buttonElement.removeAttribute('disabled');
-    }
-  });
-
-  inputTextElement.addEventListener("input", () => {
-
-    buttonElement.setAttribute('disabled', true);
-
-    if ((inputNameElement.value.length > 0) && (inputTextElement.value.length > 0)) {
-
-      buttonElement.removeAttribute('disabled');
-    }
-  });
-
-
-  const currentDate = new Date().getDate().toString().padStart(2, '0') + '.' +
-    (new Date().getMonth() + 1).toString().padStart(2, '0') + '.' +
-    new Date().getFullYear().toString().slice(-2) + " " +
-    new Date().toLocaleTimeString().slice(0, -3);
-
-  // const currentDate = new Date().toLocaleDateString('default', {day: '2-digit', month: '2-digit', year: '2-digit'}) +
-  // " "+ new Date().toLocaleTimeString().slice(0,-3);
-
-
-  buttonElement.addEventListener("click", () => {
-
-    buttonElement.setAttribute('disabled', true);
-
-
-    comments.push({
-      name: inputNameElement.value,
-      dateСreation: currentDate,
-      textComment: inputTextElement.value,
-      likeComment: false,
-      likesNumber: 0,
-    });
-    renderComments();
-
-
-
-    inputNameElement.value = "";
-    inputTextElement.value = "";
-
-
+@@ -207,33 +308,24 @@
   });
 
 
@@ -228,6 +330,10 @@
   ///Доп.задание2 нажатие клавиши Enter должно вызывать ту же логику, которая срабатывает при клике на кнопку «Добавить».
   document.addEventListener("keyup", function (enter) {
     if (enter.keyCode == 13) {
+  document.addEventListener("keyup", function (event) {
+    if (event.shiftKey && (event.keyCode === 13)) {
+      //переносит на другую строку
+    } else if (event.keyCode === 13) {
       buttonElement.click();
     }
   });
@@ -237,9 +343,12 @@
 
     //const lastElement = commentsElement.lastIndexOf(commentElement)
     comments.pop();
+    renderComments();
 
-    const lastElement = commentsElement.lastElementChild;
-    lastElement.remove();
+   // const lastElement = commentsElement.lastElementChild;
+   // lastElement.remove();
+    // const lastElement = commentsElement.lastElementChild;
+    // lastElement.remove();
   });
 
    //console.log("It works!");
