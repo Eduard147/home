@@ -1,3 +1,18 @@
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(30deg);;
+  }
+  75% {
+    transform: rotate(-30deg);;
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
 body {
     margin: 0;
   }
@@ -121,6 +136,10 @@ body {
       
    }
 
+   .-loading-like {
+    animation: rotating 2s linear infinite;
+  }
+
   .add-form {
     padding: 20px;
     margin-top: 48px;
@@ -192,6 +211,10 @@ body {
     color: black;
     font-size: 15px;
     padding: 10px;       
+  }
+
+  .comment-loading {
+    display: none;
   }
 
 
