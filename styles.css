@@ -1,7 +1,23 @@
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(30deg);;
+  }
+  75% {
+    transform: rotate(-30deg);;
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
 body {
     margin: 0;
   }
 
+  .data-loading,
   .container {
     font-family: Helvetica;
     color: #ffffff;
@@ -21,6 +37,12 @@ body {
     list-style: none;
   }
 
+
+  .form-add-login {
+    padding: 20px;
+  }
+
+  .form-add-login,
   .comment,
   .add-form {
     width: 596px;
@@ -121,6 +143,10 @@ body {
       
    }
 
+   .-loading-like {
+    animation: rotating 2s linear infinite;
+  }
+
   .add-form {
     padding: 20px;
     margin-top: 48px;
@@ -153,6 +179,8 @@ body {
     align-items: flex-end;
   }
 
+  
+
   .editor-button,
   .delete-button,
   .delete-form-button, 
@@ -167,6 +195,7 @@ body {
     cursor: pointer;
   }
   
+  .button,
   .delete-button,
   .editor-button {
     display: block; 
@@ -176,6 +205,38 @@ body {
     border-radius: 18px;
     padding: 5px 20px;
   }
+
+ .button {
+  height: 40px;
+  }
+
+  .register-link {
+    display: block; 
+    color:#ffffff;
+    align-self: center;
+    height: 40px;  
+  }
+
+  .form-add-login {
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .form-row {
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .input {
+    border-radius: 10px;
+    padding: 5px 20px;
+    border: none;
+    height: 40px;
+    font-size: 15px;
+  }
+
+ 
 
   .editor {
     display: flex;
@@ -194,5 +255,9 @@ body {
     padding: 10px;       
   }
 
-
- 
+  .comment-loading {
+    display: none;
+  }
+.form-link {
+  color: #ffffff;
+}

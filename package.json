@@ -1,0 +1,19 @@
+{
+    "name": "home-1",
+    "version": "1.0.0",
+    "description": "<!-- https://glebkaf.github.io/webdev-dom-homework/ -->\r https://eduard147.github.io/home-1/",
+    "main": "api.js",
+    "scripts": {
+      "dev": "webpack --mode development --watch"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "date-fns": "^2.30.0",
+      "lodash": "^4.17.21"
+    },
+    "devDependencies": {
+      "webpack": "^5.88.1",
+      "webpack-cli": "^5.1.4"
+    }
+  }
