@@ -98,6 +98,7 @@ const renderApp = (comments, listComments) => {
 
 
   // Функция для имитации запросов в API
+  // Не смотрите особо на внутренности, мы разберемся с этим позже
   function delay(interval = 300) {
     return new Promise((resolve) => {
       setTimeout(() => {
